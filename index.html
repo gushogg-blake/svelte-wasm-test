@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+	<head>
+	</head>
+	<body>
+		<script src="tree-sitter.js"></script>
+		<script>
+			TreeSitter.init().then(async function() {
+				let Svelte = await TreeSitter.Language.load("tree-sitter-svelte.wasm");
+				
+				let parser = new TreeSitter();
+				
+				parser.setLanguage(Svelte);
+				
+				console.log(parser.parse("test")); // works
+				console.log(parser.parse("<div></div>")); // fails
+			});
+		</script>
+	</body>
+</html>
